@@ -2,6 +2,7 @@ import { createReactEditorJS } from "react-editor-js";
 import Header from "@editorjs/header";
 import Paragraph from "@editorjs/paragraph";
 import { useRef, useCallback } from "react";
+import CustomBlock from "./CustomBlock";
 
 export default function ReactEditorInstance({holder}) {
   const ReactEditorJS = createReactEditorJS();
@@ -21,6 +22,9 @@ export default function ReactEditorInstance({holder}) {
         },
         header: {
           class: Header
+        },
+        customBlock: {
+          class: CustomBlock
         }
       }}
       defaultValue={{

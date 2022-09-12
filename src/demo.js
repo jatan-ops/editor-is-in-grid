@@ -12,14 +12,14 @@ import ReactEditorInstance from "./ReactEditorInstance";
 
 export default function Demo() {
 
-  const cells = [uuidv4(),uuidv4(),uuidv4(),uuidv4()]
+  const cells = [uuidv4()]
 
   return (
     <Container fluid>
       <Row>
         {
           cells.map((id,i) => {
-            return <Col md={3}>
+            return <Col md={12}>
             <ReactEditorInstance holder={id} />
           </Col> 
           })
@@ -30,3 +30,4 @@ export default function Demo() {
 }
 
 // tried making this work but did not work - https://www.npmjs.com/package/react-grid-layout
+// nesting editor doesn't work, you hit enter on one editor, it changes content in all the editors
