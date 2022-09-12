@@ -1,17 +1,15 @@
 {
   "dependencies": {
-    "@editorjs/editorjs": "2.25.0",
+    "@editorjs/editorjs": "latest",
     "@editorjs/header": "2.6.2",
     "@editorjs/paragraph": "2.8.0",
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
     "@mui/material": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "react": "latest",
-    "react-dom": "latest",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "react-editor-js": "2.1.0",
-    "typescript": "latest"
+    "uuid": "^9.0.0"
   },
   "description": "https://github.com/mui/material-ui/blob/v5.10.4/docs/data/material/components/grid/BasicGrid.tsx",
   "devDependencies": {
@@ -25,5 +23,17 @@
     "eject": "react-scripts eject"
   },
   "name": "mxkj2c",
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

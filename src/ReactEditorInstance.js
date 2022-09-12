@@ -3,17 +3,18 @@ import Header from "@editorjs/header";
 import Paragraph from "@editorjs/paragraph";
 import { useRef, useCallback } from "react";
 
-export default function ReactEditorInstance() {
+export default function ReactEditorInstance({holder}) {
   const ReactEditorJS = createReactEditorJS();
 
   const editorCore = useRef(null);
 
-  const handleInitialize = useCallback(async (instance) => {
+  const handleInitialize = useCallback((instance) => {
     editorCore.current = instance;
   }, []);
 
-  return (
+  return (   
     <ReactEditorJS
+      holder={holder}       
       tools={{
         paragraph: {
           class: Paragraph
@@ -116,6 +117,8 @@ export default function ReactEditorInstance() {
       }}
       onInitialize={handleInitialize}
       minHeight="0"
-    />
+    >
+      <div id={holder} />
+    </ReactEditorJS>    
   );
 }
