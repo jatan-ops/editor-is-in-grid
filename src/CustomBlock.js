@@ -19,7 +19,7 @@ class CustomBlock {
     this.api = api;
     this.readOnly = readOnly;
     this.data = {
-      instances: data.instances || [],
+      instances: data.instances || null,
     };
 
     this.nodes = {
