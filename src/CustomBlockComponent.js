@@ -12,38 +12,33 @@ import root from "react-shadow/styled-components";
 export default function CustomBlockComponent({holderIds}) {
   
   const [innerHolderIds, setInnerHolderIds] = useState(holderIds ? holderIds : [uuidv4(),uuidv4()])  
-  const blockDiv = useRef(uuidv4())
+  const container = useRef(null)
 
-  const [iframeBody1, setIframeBody1] = useState(null)
-  const [iframeBody2, setIframeBody2] = useState(null)
+  useEffect(() => {
+    if (container.current !== null && container.current.shadowRoot) return
 
-  const handleLoad1 = e => {
-    setIframeBody1(e.target.contentDocument.body)
-  }
+    // Create a shadow DOM
+    const outerShadowRoot = container.current !== null && container.current.attachShadow({ mode: 'open' })
+    const host = document.createElement('div')
+    // outerShadowRoot.appendChild(host)
 
-  const handleLoad2 = e => {
-    setIframeBody2(e.target.contentDocument.body)
-  }
+    // Create a nested shadow DOM
+    const innerShadowRoot1 = host.attachShadow({ mode: 'open' })
+    const reactRoot1 = document.createElement('div')
+    reactRoot1.id = innerHolderIds[0]
+    innerShadowRoot1.appendChild(reactRoot1)
+
+    ReactDOM.render(<ReactEditorInstance holder={innerHolderIds[0]} />, reactRoot1)
+
+    const innerShadowRoot2 = host.attachShadow({ mode: 'open' })
+    const reactRoot2 = document.createElement('div')
+    reactRoot2.id = innerHolderIds[1]
+    innerShadowRoot2.appendChild(reactRoot1)
+
+    ReactDOM.render(<ReactEditorInstance holder={innerHolderIds[1]} />, reactRoot2)
+  })
 
   return ( 
-    <>
-      <Container md={12}> 
-        <Row>
-          <iframe
-            srcDoc={`<!DOCTYPE html>`}
-            onLoad={handleLoad1}
-          >
-            {iframeBody1 && createPortal(<ReactEditorInstance holder={innerHolderIds[0]} />, iframeBody1)}
-          </iframe>          
-        
-          <iframe
-            srcDoc={`<!DOCTYPE html>`}
-            onLoad={handleLoad2}
-          >
-            {iframeBody2 && createPortal(<ReactEditorInstance holder={innerHolderIds[1]} />, iframeBody2)}
-          </iframe>          
-        </Row>
-      </Container>
-    </>
+    <div ref={container} data-cy="outer-shadow-root" />
   )
 }
