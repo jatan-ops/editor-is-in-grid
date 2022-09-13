@@ -121,8 +121,6 @@ export default function ReactEditorInstance({holder}) {
       }}
       onInitialize={handleInitialize}
       minHeight="0"
-    >
-      <div id={holder} />
-    </ReactEditorJS>    
+    />
   );
 }

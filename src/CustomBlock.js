@@ -19,7 +19,7 @@ class CustomBlock {
     this.api = api;
     this.readOnly = readOnly;
     this.data = {
-      instances: data.instances || null,
+      holderIds: data.holderIds || null,
     };
 
     this.nodes = {
@@ -32,7 +32,8 @@ class CustomBlock {
     this.nodes.holder = rootNode;
 
     ReactDOM.render(
-      <CustomBlockComponent                
+      <CustomBlockComponent 
+        holderIds={this.data.holderIds}               
       />,
       rootNode
     );

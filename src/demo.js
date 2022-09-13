@@ -19,7 +19,7 @@ export default function Demo() {
       <Row>
         {
           cells.map((id,i) => {
-            return <Col md={12}>
+            return <Col md={12}>            
             <ReactEditorInstance holder={id} />
           </Col> 
           })

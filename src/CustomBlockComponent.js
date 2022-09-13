@@ -4,43 +4,46 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { v4 as uuidv4 } from 'uuid';
 import { useEffect, useRef, useState } from "react";
+import ReactDOM, {createPortal} from "react-dom";
+
+import ReactShadowRoot from 'react-shadow-root';
+import root from "react-shadow/styled-components";
 
 export default function CustomBlockComponent({holderIds}) {
   
-  const [innerHolderIds, setInnerHolderIds] = useState(holderIds ? holderIds : [])
-  const blockDiv = useRef(null)
-  blockDiv.current = uuidv4()
+  const [innerHolderIds, setInnerHolderIds] = useState(holderIds ? holderIds : [uuidv4(),uuidv4()])  
+  const blockDiv = useRef(uuidv4())
 
-  useEffect(() => {
-    if(innerHolderIds !== null) {
+  const [iframeBody1, setIframeBody1] = useState(null)
+  const [iframeBody2, setIframeBody2] = useState(null)
 
-    }
-  },[innerHolderIds])
+  const handleLoad1 = e => {
+    setIframeBody1(e.target.contentDocument.body)
+  }
 
-  const cells = [uuidv4(),uuidv4()]
+  const handleLoad2 = e => {
+    setIframeBody2(e.target.contentDocument.body)
+  }
 
-  return (
+  return ( 
     <>
-      <div id={blockDiv.current} />
-      <Container fluid>
+      <Container md={12}> 
         <Row>
-          <Col md={6}>
-            <div id={cells[0]} />
-            <ReactEditorInstance holder={cells[0]} />          
-          </Col>
-          <Col md={6}>
-            <div id={cells[1]} />
-            <ReactEditorInstance holder={cells[1]} />
-          </Col>
+          <iframe
+            srcDoc={`<!DOCTYPE html>`}
+            onLoad={handleLoad1}
+          >
+            {iframeBody1 && createPortal(<ReactEditorInstance holder={innerHolderIds[0]} />, iframeBody1)}
+          </iframe>          
+        
+          <iframe
+            srcDoc={`<!DOCTYPE html>`}
+            onLoad={handleLoad2}
+          >
+            {iframeBody2 && createPortal(<ReactEditorInstance holder={innerHolderIds[1]} />, iframeBody2)}
+          </iframe>          
         </Row>
       </Container>
     </>
   )
 }
-
-// Make this headless - Rather than rendering editors inside the block, we render below block
-// ---
-// this block will save -> holder id's and will render -> empty div with unique id
-// on initial load -> initialize state with empty array or array of holder id's (if rendering previously added blocks)
-// when state !== null -> find empty div, travel upto ce-block, below it add div sibling -> inside sibling, 
-// w/ReactDOM.render, render above container component
