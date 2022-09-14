@@ -22,13 +22,13 @@ export default function CustomBlockComponent({holderIds}) {
     const interval1 = setInterval(() => {
       if(!!document.getElementById('parent-shadow1').shadowRoot.children[1]) {
         clearInterval(interval1)
-        setHolderReady1(true)
+        setHolderReady(true)
       }
     },100)
     const interval2 = setInterval(() => {
       if(!!document.getElementById('parent-shadow2').shadowRoot.children[1]) {
         clearInterval(interval2)
-        setHolderReady2(true)
+        setHolderReady1(true)
       }
     },100)
   },[])

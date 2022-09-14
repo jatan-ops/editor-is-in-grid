@@ -1,4 +1,3 @@
-// toolbar.css
 const style = `
   .my-button {
     background-color: red;
