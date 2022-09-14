@@ -2,7 +2,6 @@ import ReactDOM from "react-dom";
 
 import CustomBlockComponent from "./CustomBlockComponent";
 import CustomFrameRender from "./CustomFrameRender";
-import NativeFrameRender from "./NativeFrameRender";
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -36,7 +35,7 @@ class CustomBlock {
     this.nodes.holder = rootNode;
 
     ReactDOM.render(
-      <NativeFrameRender 
+      <CustomFrameRender 
         holderIds={this.data.holderIds}               
       />,
       rootNode
